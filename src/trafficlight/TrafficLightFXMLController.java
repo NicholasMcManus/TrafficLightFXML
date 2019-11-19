@@ -62,6 +62,22 @@ public class TrafficLightFXMLController implements Initializable {
     }    
     
     /**
+     * Start the animation when pushed
+     */
+    @FXML protected void startAnimation()
+    {
+        sequence.play();
+    }
+    
+    /**
+     * Pause the animation where it is
+     */
+    @FXML protected void pauseAnimation()
+    {
+        sequence.pause();
+    }
+    
+    /**
      * Create the Sequential Transition and allows it to be rebuilt with changes
      */
     private void buildAnimation()
