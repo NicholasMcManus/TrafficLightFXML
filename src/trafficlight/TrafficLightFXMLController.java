@@ -82,8 +82,7 @@ public class TrafficLightFXMLController implements Initializable {
      */
     private void buildAnimation()
     {
-        System.out.println("Building Animation");
-        
+        //Put together the yellow light flashing animation
         SequentialTransition yellowFlash = new SequentialTransition(
         new Timeline(
             new KeyFrame(Duration.seconds(0), e -> light(yellowLight)),
@@ -91,9 +90,11 @@ public class TrafficLightFXMLController implements Initializable {
             new KeyFrame(Duration.seconds(blinkCycle),e -> doNothing())
         ));
         
+        //Finish up setup
         yellowFlash.setOnFinished(e -> darken(yellowLight));
         yellowFlash.setCycleCount((int)Math.round(yellowVal.divide(blinkCycle).get()));
         
+        //Create hte rest of the sequence
         sequence = new SequentialTransition(
                 new Timeline(
                     new KeyFrame(Duration.seconds(0), e -> light(redLight)),
@@ -104,10 +105,10 @@ public class TrafficLightFXMLController implements Initializable {
                 yellowFlash
         );
         
-        //Set indefinite
+        //Set the sequence to rebuild and start after ending
         sequence.setOnFinished(e -> {buildAnimation(); sequence.play();});
         
-        //Set 
+        //Set cycle to 1
         sequence.setCycleCount(1);
     }
     
@@ -126,7 +127,6 @@ public class TrafficLightFXMLController implements Initializable {
     private void light(Circle target)
     {
         target.setOpacity(1);
-        //System.out.println("Light, " + target);
     }
     
     /**
@@ -136,6 +136,5 @@ public class TrafficLightFXMLController implements Initializable {
     private void darken(Circle target)
     {
         target.setOpacity(lowOpacity);
-        //System.out.println("Turn off, " + target);
     }
 }
