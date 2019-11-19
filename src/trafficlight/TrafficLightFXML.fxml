@@ -21,9 +21,12 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Circle fx:id="redLight" fill="#ff000080" radius="75.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" />
-      <Circle fx:id="yellowLight" fill="#ffff0080" radius="75.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Circle fx:id="greenLight" fill="#00ff0080" radius="75.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Circle layoutX="85.0" layoutY="91.0" radius="75.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Circle layoutX="310.0" layoutY="91.0" radius="75.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Circle radius="75.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" />
+      <Circle fx:id="redLight" fill="RED" radius="75.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" />
+      <Circle fx:id="yellowLight" fill="YELLOW" radius="75.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Circle fx:id="greenLight" fill="LIME" radius="75.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
       <GridPane GridPane.rowIndex="3">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="132.0" />

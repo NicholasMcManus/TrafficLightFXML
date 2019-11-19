@@ -17,6 +17,11 @@ import javafx.stage.Stage;
  */
 public class TrafficLight extends Application {
     
+    /**
+     * Start the program as an FX application
+     * @param stage The main stage to be worked on 
+     * @throws Exception 
+     */
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("TrafficLightFXML.fxml"));
