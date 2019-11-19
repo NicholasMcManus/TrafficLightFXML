@@ -2,6 +2,7 @@ package trafficlight;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
@@ -32,9 +33,9 @@ public class TrafficLightFXMLController implements Initializable {
         greenVal.bind(greenSlider.valueProperty());
         
         //Set the text properties
-        redLabel.textProperty().bind(redVal.asString().concat(" Seconds"));
-        yellowLabel.textProperty().bind(yellowVal.asString().concat(" Seconds"));
-        greenLabel.textProperty().bind(greenVal.asString().concat(" Seconds"));
+        redLabel.textProperty().bind(Bindings.format("%3.0f", redVal).concat(" Seconds"));
+        yellowLabel.textProperty().bind(Bindings.format("%3.0f", yellowVal).concat(" Seconds"));
+        greenLabel.textProperty().bind(Bindings.format("%3.0f", greenVal).concat(" Seconds"));
     }    
     
 }
