@@ -74,12 +74,12 @@
             </Text>
          </children>
       </GridPane>
-      <Button mnemonicParsing="false" onAction="#startAnimation" text="Play" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <Button fx:id="playButton" mnemonicParsing="false" onAction="#startAnimation" text="Play" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#pauseAnimation" text="Pause" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
+      <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#pauseAnimation" text="Pause" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
          <GridPane.margin>
             <Insets right="25.0" top="25.0" />
          </GridPane.margin>

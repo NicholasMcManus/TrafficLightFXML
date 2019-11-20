@@ -6,10 +6,13 @@ import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.animation.SequentialTransition;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -21,6 +24,7 @@ public class TrafficLightFXMLController implements Initializable {
     @FXML private Circle redLight, yellowLight, greenLight;
     @FXML private Slider redSlider, yellowSlider, greenSlider;
     @FXML private Text redLabel, yellowLabel, greenLabel;
+    @FXML private Button playButton, pauseButton;
     
     //Period of time yellow light should cycle (off 1/2 period, on other 1/2)
     private final double blinkCycle = 1;
@@ -28,6 +32,7 @@ public class TrafficLightFXMLController implements Initializable {
     
     //Other class variables
     private DoubleProperty redVal, yellowVal, greenVal;
+    private BooleanProperty disableButton;
     private SequentialTransition sequence;
     
     /**
@@ -41,6 +46,11 @@ public class TrafficLightFXMLController implements Initializable {
         this.darken(redLight);
         this.darken(yellowLight);
         this.darken(greenLight);
+        
+        //Bind the disabled properties of start and pause buttons
+        disableButton = new SimpleBooleanProperty(false);
+        playButton.disableProperty().bind(disableButton);
+        pauseButton.disableProperty().bind(disableButton.not());
         
         //Create the bindings
         redVal = new SimpleDoubleProperty();
@@ -57,8 +67,9 @@ public class TrafficLightFXMLController implements Initializable {
         yellowLabel.textProperty().bind(Bindings.format("%3.0f", yellowVal).concat(" Seconds"));
         greenLabel.textProperty().bind(Bindings.format("%3.0f", greenVal).concat(" Seconds"));
         
+        //Finalize and start the program
         this.buildAnimation();
-        sequence.play();
+        this.startAnimation();
     }    
     
     /**
@@ -67,6 +78,7 @@ public class TrafficLightFXMLController implements Initializable {
     @FXML protected void startAnimation()
     {
         sequence.play();
+        disableButton.set(true);
     }
     
     /**
@@ -75,6 +87,7 @@ public class TrafficLightFXMLController implements Initializable {
     @FXML protected void pauseAnimation()
     {
         sequence.pause();
+        disableButton.set(false);
     }
     
     /**
@@ -87,7 +100,7 @@ public class TrafficLightFXMLController implements Initializable {
         new Timeline(
             new KeyFrame(Duration.seconds(0), e -> light(yellowLight)),
             new KeyFrame(Duration.seconds(blinkCycle/2), e -> darken(yellowLight)),
-            new KeyFrame(Duration.seconds(blinkCycle),e -> doNothing())
+            new KeyFrame(Duration.seconds(blinkCycle))    
         ));
         
         //Finish up setup
@@ -110,14 +123,6 @@ public class TrafficLightFXMLController implements Initializable {
         
         //Set cycle to 1
         sequence.setCycleCount(1);
-    }
-    
-    /**
-     * Does nothing to create the end of a Timeline
-     */
-    private void doNothing()
-    {
-        //Seriously, This is only called to make space in a timeline
     }
     
     /**
