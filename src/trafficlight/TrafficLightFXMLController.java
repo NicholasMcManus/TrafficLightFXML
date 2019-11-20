@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -21,10 +22,12 @@ import javafx.util.Duration;
 public class TrafficLightFXMLController implements Initializable {
     
     //FXML Variables
-    @FXML private Circle redLight, yellowLight, greenLight;
+    @FXML private Circle redLight, yellowLight, greenLight,
+                        redBack, yellowBack, greenBack;
     @FXML private Slider redSlider, yellowSlider, greenSlider;
     @FXML private Text redLabel, yellowLabel, greenLabel;
     @FXML private Button playButton, pauseButton;
+    @FXML private GridPane mainPane;
     
     //Period of time yellow light should cycle (off 1/2 period, on other 1/2)
     private final double blinkCycle = 1;
@@ -66,6 +69,15 @@ public class TrafficLightFXMLController implements Initializable {
         redLabel.textProperty().bind(Bindings.format("%3.0f", redVal).concat(" Seconds"));
         yellowLabel.textProperty().bind(Bindings.format("%3.0f", yellowVal).concat(" Seconds"));
         greenLabel.textProperty().bind(Bindings.format("%3.0f", greenVal).concat(" Seconds"));
+        
+        //Setup Lights to resize according to grid size
+        redBack.radiusProperty().bind(redLight.radiusProperty());
+        yellowBack.radiusProperty().bind(yellowLight.radiusProperty());
+        greenBack.radiusProperty().bind(greenLight.radiusProperty());
+        
+        redLight.radiusProperty().bind(mainPane.heightProperty().divide(8));
+        yellowLight.radiusProperty().bind(mainPane.heightProperty().divide(8));
+        greenLight.radiusProperty().bind(mainPane.heightProperty().divide(8));
         
         //Finalize and start the program
         this.buildAnimation();
