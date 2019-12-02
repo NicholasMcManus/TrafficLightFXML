@@ -90,8 +90,17 @@ public class TrafficLightFXMLController implements Initializable {
      */
     @FXML protected void startAnimation()
     {
-        sequence.play();
+        //Reset Lights
+        this.darken(redLight);
+        this.darken(yellowLight);
+        this.darken(greenLight);
+        
+        //Toggle the buttons
         disableButton.set(true);
+        
+        //Bebuild and start the animation
+        this.buildAnimation();
+        sequence.play();
     }
     
     /**
