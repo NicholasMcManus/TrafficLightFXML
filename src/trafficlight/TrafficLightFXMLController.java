@@ -45,7 +45,7 @@ public class TrafficLightFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Turn off the lights
+        //Make sure the lights are off
         this.darken(redLight);
         this.darken(yellowLight);
         this.darken(greenLight);
@@ -75,6 +75,7 @@ public class TrafficLightFXMLController implements Initializable {
         yellowBack.radiusProperty().bind(yellowLight.radiusProperty());
         greenBack.radiusProperty().bind(greenLight.radiusProperty());
         
+        //I wouldn't need to divide by 8 if I could get the number of rows and multiply by 2
         redLight.radiusProperty().bind(mainPane.heightProperty().divide(8));
         yellowLight.radiusProperty().bind(mainPane.heightProperty().divide(8));
         greenLight.radiusProperty().bind(mainPane.heightProperty().divide(8));
@@ -112,7 +113,7 @@ public class TrafficLightFXMLController implements Initializable {
         new Timeline(
             new KeyFrame(Duration.seconds(0), e -> light(yellowLight)),
             new KeyFrame(Duration.seconds(blinkCycle/2), e -> darken(yellowLight)),
-            new KeyFrame(Duration.seconds(blinkCycle))    
+            new KeyFrame(Duration.seconds(blinkCycle))
         ));
         
         //Finish up setup
@@ -126,9 +127,12 @@ public class TrafficLightFXMLController implements Initializable {
                     new KeyFrame(Duration.seconds(redVal.get()), e -> darken(redLight))),
                 new Timeline(
                     new KeyFrame(Duration.seconds(0), e -> light(greenLight)),
-                    new KeyFrame(Duration.seconds(greenVal.get()), e -> darken(greenLight))),
-                yellowFlash
+                    new KeyFrame(Duration.seconds(greenVal.get()), e -> darken(greenLight)))
         );
+        
+        //Add the yellow light handling if the yellow light is required
+        if(yellowFlash.getCycleCount() > 0)
+            sequence.getChildren().add(yellowFlash);
         
         //Set the sequence to rebuild and start after ending
         sequence.setOnFinished(e -> {buildAnimation(); sequence.play();});

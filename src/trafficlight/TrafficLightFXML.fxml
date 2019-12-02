@@ -61,7 +61,7 @@
                </GridPane.margin>
             </Text>
             <Slider fx:id="greenSlider" blockIncrement="1.0" majorTickUnit="5.0" max="30.0" minorTickCount="4" showTickMarks="true" snapToTicks="true" value="25.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Slider fx:id="yellowSlider" blockIncrement="1.0" majorTickUnit="5.0" max="10.0" minorTickCount="4" showTickMarks="true" snapToTicks="true" value="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Slider fx:id="yellowSlider" blockIncrement="1.0" majorTickUnit="5.0" max="30.0" minorTickCount="4" showTickMarks="true" snapToTicks="true" value="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Text fx:id="greenLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="###" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="5.0" />
