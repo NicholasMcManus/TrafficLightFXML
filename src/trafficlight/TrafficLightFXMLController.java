@@ -143,6 +143,15 @@ public class TrafficLightFXMLController implements Initializable {
         if(yellowFlash.getCycleCount() > 0)
             sequence.getChildren().add(yellowFlash);
         
+        //If all sliders are at 0, hold for 1 second
+        if(redVal.get() < 1 && yellowVal.get() < 1 && greenVal.get() < 1)
+        {
+            sequence.getChildren().add(new Timeline(
+                    new KeyFrame(Duration.seconds(0)),
+                    new KeyFrame(Duration.seconds(1))
+            ));
+        }
+        
         //Set the sequence to rebuild and start after ending
         sequence.setOnFinished(e -> {buildAnimation(); sequence.play();});
         
